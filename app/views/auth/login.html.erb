@@ -1,79 +1,349 @@
-<main class="login-page">
+<main class="flex min-h-screen items-center justify-center bg-slate-100 px-6 py-10">
 
-  <section class="login-card">
+  <section
+    class="
+      grid
+      w-full
+      max-w-5xl
+      overflow-hidden
+      rounded-2xl
+      bg-white
+      shadow-xl
+      md:grid-cols-2
+    "
+  >
 
-    <div class="login-image">
-      <%= image_tag "cathedral.jpg", alt: "Interior catedral" %>
+    <!-- ======================================= -->
+    <!-- LADO ESQUERDO - IMAGEM -->
+    <!-- ======================================= -->
 
-      <div class="login-image-overlay">
-        <div class="brand">
-          <span class="brand-name">SaintStudy</span>
-          <span class="brand-description">
-            Sistema de Gestão de Catequese Paroquial
-          </span>
-        </div>
+    <div class="relative hidden min-h-[650px] overflow-hidden md:block">
 
-        <p class="brand-message">
+      <%= image_tag(
+        "cathedral.jpg",
+        alt: "Interior da catedral",
+        class: "absolute inset-0 h-full w-full object-cover"
+      ) %>
+
+      <!-- Overlay escuro -->
+      <div
+        class="
+          absolute
+          inset-0
+          bg-gradient-to-t
+          from-slate-950/95
+          via-slate-900/20
+          to-transparent
+        "
+      ></div>
+
+      <!-- Marca -->
+      <div
+        class="
+          absolute
+          bottom-10
+          left-10
+          right-10
+          text-white
+        "
+      >
+
+        <h2 class="text-3xl font-bold">
+          SaintStudy
+        </h2>
+
+        <p class="mt-3 max-w-xs text-sm leading-6 text-white/85">
           Gestão paroquial com a clareza, modernidade
           e o peso da tradição.
         </p>
+
       </div>
+
     </div>
 
-    <div class="login-content">
 
-      <div class="login-header">
-        <h1>Bem-vindo ao Portal</h1>
-        <p>Acesse sua conta.</p>
-      </div>
+    <!-- ======================================= -->
+    <!-- LADO DIREITO - LOGIN -->
+    <!-- ======================================= -->
 
-      <%= form_with url: auth_path, method: :post, local: true, class: "login-form" do |form| %>
+    <div
+      class="
+        flex
+        min-h-[650px]
+        items-center
+        justify-center
+        px-8
+        py-12
+        sm:px-12
+        lg:px-16
+      "
+    >
 
-        <div class="form-group">
-          <%= form.label :email, "E-mail" %>
+      <div class="w-full max-w-sm">
 
-          <%= form.email_field :email,
-                id: "email",
-                placeholder: "nome@exemplo.com" %>
-        </div>
 
-        <div class="form-group">
+        <!-- TÍTULO -->
 
-          <div class="password-header">
-            <%= form.label :senha, "Senha" %>
+        <header class="mb-8">
 
-            <%= link_to "Esqueci minha senha", "#" %>
+          <h1 class="text-3xl font-bold text-blue-950">
+            Bem-vindo ao Portal
+          </h1>
+
+          <p class="mt-2 text-sm text-slate-500">
+            Acesse sua conta.
+          </p>
+
+        </header>
+
+
+        <!-- ======================================= -->
+        <!-- FORMULÁRIO -->
+        <!-- ======================================= -->
+
+        <%= form_with(
+          url: auth_path,
+          method: :post,
+          local: true,
+          class: "space-y-5"
+        ) do |form| %>
+
+
+          <!-- EMAIL -->
+
+          <div>
+
+            <%= form.label(
+              :email,
+              "E-mail ou telefone",
+              class: "
+                mb-2
+                block
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wide
+                text-slate-600
+              "
+            ) %>
+
+            <%= form.email_field(
+              :email,
+              placeholder: "nome@exemplo.com",
+              class: "
+                block
+                h-12
+                w-full
+                rounded-lg
+                border-0
+                bg-slate-100
+                px-4
+                text-sm
+                text-slate-700
+                placeholder:text-slate-400
+                focus:ring-2
+                focus:ring-blue-800
+              "
+            ) %>
+
           </div>
 
-          <%= form.password_field :senha, id: "password", placeholder: "••••••••" %>
+
+          <!-- SENHA -->
+
+          <div>
+
+            <div class="mb-2 flex items-center justify-between">
+
+              <%= form.label(
+                :senha,
+                "Senha",
+                class: "
+                  text-xs
+                  font-semibold
+                  uppercase
+                  tracking-wide
+                  text-slate-600
+                "
+              ) %>
+
+              <%= link_to(
+                "Esqueci minha senha",
+                "#",
+                class: "
+                  text-xs
+                  font-medium
+                  text-amber-700
+                  hover:underline
+                "
+              ) %>
+
+            </div>
+
+
+            <%= form.password_field(
+              :senha,
+              placeholder: "••••••••",
+              class: "
+                block
+                h-12
+                w-full
+                rounded-lg
+                border-0
+                bg-slate-100
+                px-4
+                text-sm
+                text-slate-700
+                placeholder:text-slate-400
+                focus:ring-2
+                focus:ring-blue-800
+              "
+            ) %>
+
+          </div>
+
+
+          <!-- LEMBRAR DE MIM -->
+
+          <label
+            class="
+              flex
+              cursor-pointer
+              items-center
+              gap-2
+              text-xs
+              text-slate-500
+            "
+          >
+
+            <%= form.check_box(
+              :remember,
+              class: "
+                h-4
+                w-4
+                rounded
+                border-slate-300
+                text-blue-900
+              "
+            ) %>
+
+            Lembrar de mim
+
+          </label>
+
+
+          <!-- BOTÃO -->
+
+          <%= form.submit(
+            "Entrar",
+            class: "
+              h-12
+              w-full
+              cursor-pointer
+              rounded-lg
+              border-0
+              bg-blue-950
+              text-sm
+              font-semibold
+              text-white
+              shadow-md
+              transition
+              hover:bg-blue-900
+              focus:ring-4
+              focus:ring-blue-200
+            "
+          ) %>
+
+        <% end %>
+
+
+        <!-- ======================================= -->
+        <!-- DIVISOR -->
+        <!-- ======================================= -->
+
+        <div class="my-7 flex items-center gap-4">
+
+          <div class="h-px flex-1 bg-slate-200"></div>
+
+          <span class="text-xs font-semibold text-slate-400">
+            OU ENTRE COM
+          </span>
+
+          <div class="h-px flex-1 bg-slate-200"></div>
 
         </div>
 
-        <div class="remember">
-          <%= form.check_box :remember, id: "remember" %>
 
-          <%= form.label :remember, "Lembrar de mim" %>
+        <!-- ======================================= -->
+        <!-- LOGIN SOCIAL -->
+        <!-- ======================================= -->
+
+        <div class="grid grid-cols-2 gap-3">
+
+          <%= link_to(
+            "Google",
+            "/auth/google_oauth2",
+            class: "
+              flex
+              h-11
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              bg-white
+              text-sm
+              text-slate-600
+              transition
+              hover:bg-slate-50
+            "
+          ) %>
+
+
+          <%= link_to(
+            "Apple",
+            "/auth/apple",
+            class: "
+              flex
+              h-11
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              bg-white
+              text-sm
+              text-slate-600
+              transition
+              hover:bg-slate-50
+            "
+          ) %>
+
         </div>
 
-        <%= form.submit "Entrar", class: "login-button" %>
 
-      <% end %>
+        <!-- ======================================= -->
+        <!-- CADASTRO -->
+        <!-- ======================================= -->
 
-      <div class="login-divider">
-        <span></span>
-        <p>OU ENTRE COM</p>
-        <span></span>
-      </div>
+        <p class="mt-8 text-center text-xs text-slate-500">
 
-      <div class="social-buttons">
-        <%= link_to "Google", "/auth/google_oauth2", class: "social-button" %>
+          Não tem uma conta?
 
-        <%= link_to "Apple", "/auth/apple", class: "social-button" %>
-      </div>
+          <%= link_to(
+            "Realizar Cadastro",
+            signup_path,
+            class: "
+              ml-1
+              font-semibold
+              text-amber-700
+              hover:underline
+            "
+          ) %>
 
-      <div class="login-register">
-        Não tem uma conta?
-        <%= link_to "Realizar Cadastro", "#" %>
+        </p>
+
+
       </div>
 
     </div>

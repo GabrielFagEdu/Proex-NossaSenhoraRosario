@@ -7,23 +7,27 @@
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   </head>
 
-  <body>
+  <body class="m-0 min-h-screen bg-slate-100">
+
     <% flash.each do |tipo, mensagem| %>
-      <div class="mx-auto mt-4 max-w-md rounded-lg border px-4 py-3 text-sm
+      <div class="
+        fixed left-1/2 top-5 z-50
+        w-full max-w-md
+        -translate-x-1/2
+        rounded-lg border px-4 py-3 text-sm shadow-lg
         <%= tipo.to_sym == :alert ?
           'border-red-200 bg-red-50 text-red-800' :
-          'border-green-200 bg-green-50 text-green-800' %>">
+          'border-green-200 bg-green-50 text-green-800' %>
+      ">
         <%= mensagem %>
       </div>
     <% end %>
 
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+    <%= yield %>
+
   </body>
 </html>
