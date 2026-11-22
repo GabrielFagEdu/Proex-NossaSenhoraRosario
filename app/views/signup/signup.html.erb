@@ -92,14 +92,16 @@
         <!-- FORM -->
         <!-- ========================= -->
 
-        <form class="space-y-5">
+        <form action="<%= signup_path %>" method="post" class="space-y-5">
 
-          <!-- EMAIL -->
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+          <!-- NOME -->
 
           <div>
 
             <label
-              for="email"
+              for="pessoa_nome"
               class="
                 mb-2
                 block
@@ -110,14 +112,58 @@
                 text-slate-600
               "
             >
-              E-mail ou telefone
+              Nome completo
             </label>
 
             <input
-              id="email"
-              name="email"
+              id="pessoa_nome"
+              name="pessoa[nome]"
+              type="text"
+              placeholder="Seu nome" value="<%= @pessoa&.nome %>" required
+              class="
+                block
+                h-12
+                w-full
+                rounded-lg
+                border-0
+                bg-slate-100
+                px-4
+                text-sm
+                text-slate-700
+                outline-none
+                placeholder:text-slate-400
+                focus:ring-2
+                focus:ring-blue-800
+              "
+            >
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div>
+
+            <label
+              for="pessoa_email"
+              class="
+                mb-2
+                block
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wide
+                text-slate-600
+              "
+            >
+              E-mail
+            </label>
+
+            <input
+              id="pessoa_email"
+              name="pessoa[email]"
               type="email"
-              placeholder="nome@exemplo.com"
+              placeholder="nome@exemplo.com" value="<%= @pessoa&.email %>" required
               class="
                 block
                 h-12
@@ -143,7 +189,7 @@
           <div>
 
             <label
-              for="password"
+              for="pessoa_senha"
               class="
                 mb-2
                 block
@@ -160,10 +206,10 @@
             <div class="relative">
 
               <input
-                id="password"
-                name="password"
+                id="pessoa_senha"
+                name="pessoa[senha]"
                 type="password"
-                placeholder="••••••••"
+                placeholder="••••••••" required minlength="8"
                 class="
                   block
                   h-12
@@ -227,7 +273,7 @@
           <div>
 
             <label
-              for="password_confirmation"
+              for="pessoa_senha_confirmation"
               class="
                 mb-2
                 block
@@ -244,10 +290,10 @@
             <div class="relative">
 
               <input
-                id="password_confirmation"
-                name="password_confirmation"
+                id="pessoa_senha_confirmation"
+                name="pessoa[senha_confirmation]"
                 type="password"
-                placeholder="••••••••"
+                placeholder="••••••••" required minlength="8"
                 class="
                   block
                   h-12
@@ -307,7 +353,7 @@
           <!-- BOTÃO -->
 
           <button
-            type="button"
+            type="submit"
             class="
               mt-2
               h-12
@@ -325,7 +371,7 @@
               focus:ring-blue-200
             "
           >
-            Entrar
+            Criar conta
           </button>
 
         </form>
