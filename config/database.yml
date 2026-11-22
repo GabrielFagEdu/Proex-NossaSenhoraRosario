@@ -17,5 +17,10 @@ test:
 
 production:
   <<: *default
+  host: database-1.cluster-cz8eaic28vop.us-east-2.rds.amazonaws.com
+  port: 5432
   database: saintstudy_production
   username: saintstudy
+  password: <%= ENV["SAINTSTUDY_DATABASE_PASSWORD_PRODUCTION"] %>
+  sslmode: verify-full
+  sslrootcert: /etc/ssl/certs/aws-rds-global-bundle.pem 
