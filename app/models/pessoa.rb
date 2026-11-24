@@ -1,8 +1,8 @@
 
 class Pessoa < ApplicationRecord
-  has_many :mural_avisos,  foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
-  has_many :relatorios,    foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
-  has_many :documentos,    foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
+  has_many :mural_avisos, foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
+  has_many :relatorios, foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
+  has_many :documentos, foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
   has_many :consentimentos_lgpd, class_name: "ConsentimentoLgpd", foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
   has_many :pessoa_perfis, class_name: "PessoaPerfil", foreign_key: :id_pessoa, inverse_of: :pessoa, dependent: :destroy
   has_many :perfis, through: :pessoa_perfis, source: :perfil

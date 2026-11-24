@@ -6,13 +6,14 @@ class AuthController < ApplicationController
   end
 
   def logar
-    email = params[:email].to_s.strip.downcase
-    senha = params[:senha].to_s
+    dados = login_params
+    email = dados[:email].to_s.strip.downcase
+    senha = dados[:senha].to_s
 
     pessoa = Pessoa.find_by(email: email)
 
     if pessoa&.ativo? && pessoa.authenticate_senha(senha)
-      iniciar_sessao(pessoa, lembrar: params[:remember] == "1")
+      iniciar_sessao(pessoa, lembrar: dados[:remember] == "1")
 
       redirect_to root_path, notice: "Login realizado com sucesso."
     else
@@ -47,6 +48,10 @@ class AuthController < ApplicationController
   end
 
   private
+
+  def login_params
+    params.permit(:email, :senha, :remember)
+  end
 
   def iniciar_sessao(pessoa, lembrar: false, avisar: true)
     reset_session
